@@ -8,7 +8,7 @@ internal static class Program
         {
             Console.Write(MainStart);
 
-            string? choice = Console.ReadLine();
+            string choice = Console.ReadLine()!;
 
             switch (choice)
             {
@@ -123,7 +123,7 @@ internal static class Program
         while (true)
         {
             Console.Write(MenuArrStart);
-            string? choice = Console.ReadLine();
+            string choice = Console.ReadLine()!;
 
             switch (choice)
             {
@@ -157,7 +157,7 @@ internal static class Program
         {
             Console.Write(MenuArrCreateStart);
 
-            string? choice = Console.ReadLine();
+            string choice = Console.ReadLine()!;
 
             switch (choice)
             {
@@ -194,7 +194,7 @@ internal static class Program
         for (int i = 0; i < countOfRows; i++)
         {
             Console.Write(ReadArrayInput + (i + 1) + ": ");
-            jaggedArrChars[i] = Console.ReadLine()?.ToCharArray()!;
+            jaggedArrChars[i] = Console.ReadLine()!.ToCharArray();
         }
 
         Console.WriteLine(CreateArraySuccess);
@@ -261,16 +261,16 @@ internal static class Program
 
     /// Подсчет количества гласных букв в массиве символов
     /// <param name="chars">Массив символов</param>
-    private static int CountOfVowels(char[]? chars)
+    private static int CountOfVowels(char[] chars)
     {
-        return chars!.Count(sym => Vowels.Contains(sym));
+        return chars.Count(symbol => Vowels.Contains(symbol));
     }
 
     ///Вывод рваного массива в консоль
     private static void WriteArray<T>(T[][] jaggedArrInts)
     {
         if (jaggedArrInts.Length > 0)
-            foreach (T[]? row in jaggedArrInts)
+            foreach (T[] row in jaggedArrInts)
             {
                 foreach (T element in row)
                     Console.Write($"{element,5}");
