@@ -1,4 +1,6 @@
-﻿namespace Lab_6;
+﻿using System.Text.RegularExpressions;
+
+namespace Lab_6;
 
 internal static class Program
 {
@@ -6,22 +8,26 @@ internal static class Program
     {
         while (true)
         {
-            Console.Write(MainStart);
+            Console.Write("Выберите, с чем работать:" +
+                          "\n1. Рваный массив"        +
+                          "\n2. Символьная строка"    +
+                          "\n3. Завершить выполнение" +
+                          " программы\nВаш выбор: ");
 
             string choice = Console.ReadLine()!;
 
             switch (choice)
             {
                 case "1":
-                    Console.WriteLine(MainChoiceArr);
+                    Console.WriteLine("\nВы выбрали работу с рваным массивом");
                     MenuArr();
                     break;
                 case "2":
-                    Console.WriteLine(MainChoiceStr);
-//                    MenuString();
+                    Console.WriteLine("\nВы выбрали работу со строками");
+                    MenuString();
                     break;
                 case "3":
-                    Console.WriteLine(MainExit);
+                    Console.WriteLine("\nЗавершение программы...");
                     return;
                 default:
                     Console.WriteLine(ErrUnknownChar);
@@ -29,90 +35,6 @@ internal static class Program
             }
         }
     }
-
-    #region Литерные сроки сообщений
-
-    private const string ReturnToMain         = "\nВы выбрали вернуться в главное меню";
-    private const string ReturnToPreviousMenu = "\nВы выбрали вернуться в предыдущее меню";
-    private const string CreateArraySuccess   = "\nМассив успешно создан!";
-
-    private const string Chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-                                 "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"                    +
-                                 "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ0123456789";
-
-    private const string Vowels     = "eyuioaEYUIOAуеёыаоэяиюУЕЁЫАОЭЯИЮ";
-    private const string ArrayEmpty = "Массив не содержит элементов";
-
-    #region Функция Main
-
-    private const string MainStart = @"Выберите, с чем работать:
-1. Рваный массив
-2. Символьная строка
-3. Завершить выполнение программы
-Ваш выбор: ";
-
-    private const string MainChoiceArr  = "\nВы выбрали работу с рваным массивом";
-    private const string MainChoiceStr  = "\nВы выбрали работу со строками";
-    private const string MainExit       = "\nЗавершение программы...";
-    private const string ErrUnknownChar = "\nВы ввели неизвестный символ! Введите заново!";
-
-    #endregion
-
-    #region Функция MenuArr
-
-    private const string MenuArrStart = "\n" + @"Выберите, что сделать:
-1. Создать рваный массив символов
-2. Удалить из массива первую строку, в которой есть не менее 3 гласных букв
-3. Вывести массив на экран
-4. Вернуться в главное меню
-Ваш выбор: ";
-
-    private const string MenuArrChoiceCreateArr = "\nВы выбрали создать рваный массив символов";
-
-    private const string MenuArrChoiceDeleteRow = "\nВы выбрали удалить из массива первую строку, " +
-                                                  "в которой есть не менее 3 гласных букв";
-
-    private const string MenuArrChoiceWrite = "\nВы выбрали вывести массив на экран";
-
-    #endregion
-
-    #region Функция MenuArrCreate
-
-    private const string MenuArrCreateStart = "\n" + @"Выберите, что сделать:
-1. Ввести элементы вручную
-2. Сгенерировать элементы с помощью датчика случайных чисел
-3. Вернуться в предыдущее меню
-Ваш выбор: ";
-
-    private const string MenuArrCreateRead = "\nВыбрано ввести элементы массива вручную";
-
-    private const string MenuArrCreateGenerate = "\nВыбрано сгенерировать элементы массива " +
-                                                 "с помощью датчика случайных чисел";
-
-    #endregion
-
-    #region Функция ReadArray и GenerateArray
-
-    private const string InputCountOf = "\nВведите целое неотрицательное число" +
-                                        " – количество строк рваного массива: ";
-
-    private const string ReadArrayWarn = "\nСимволы вводите подряд, не разделяя ничем\n" +
-                                         "Для завершения ввода нажмите “Enter”";
-
-    private const string ReadArrayInput = "Введите строку символов №";
-
-    #endregion
-
-    private const string DeleteFailFind = "\nНе найдено строки, в которой есть" +
-                                          " не менее 3 гласных букв!\nУдаление невозможно!";
-
-    private const string DeleteArrEmpty = "Массив пустой, удаление невозможно!";
-    private const string DeleteSuccess  = "Строка успешно удалена!\nНомер строки: ";
-
-    private const string ErrConvert = "\nОШИБКА! Введено нецелое число, или отрицательное, " +
-                                      "или не число!\nВведите заново: ";
-
-    #endregion
 
     #region Рваный массив
 
@@ -122,21 +44,27 @@ internal static class Program
         char[][] jaggedArray = Array.Empty<char[]>();
         while (true)
         {
-            Console.Write(MenuArrStart);
+            Console.Write("\nВыберите, что сделать:"                +
+                          "\n1. Создать рваный массив символов"     +
+                          "\n2. Удалить из массива первую строку,"  +
+                          " в которой есть не менее 3 гласных букв" +
+                          "\n3. Вывести массив на экран"            +
+                          "\n4. Вернуться в главное меню\nВаш выбор: ");
             string choice = Console.ReadLine()!;
 
             switch (choice)
             {
                 case "1":
-                    Console.WriteLine(MenuArrChoiceCreateArr);
+                    Console.WriteLine("\nВы выбрали создать рваный массив символов");
                     MenuArrCreate(ref jaggedArray);
                     break;
                 case "2":
-                    Console.WriteLine(MenuArrChoiceDeleteRow);
+                    Console.WriteLine("\nВы выбрали удалить из массива первую строку," +
+                                      " в которой есть не менее 3 гласных букв");
                     DeleteRowMore3Vowels(ref jaggedArray);
                     break;
                 case "3":
-                    Console.WriteLine(MenuArrChoiceWrite);
+                    Console.WriteLine("\nВы выбрали вывести массив на экран");
                     WriteArray(jaggedArray);
                     break;
                 case "4":
@@ -155,24 +83,30 @@ internal static class Program
     {
         while (true)
         {
-            Console.Write(MenuArrCreateStart);
+            Console.Write("\nВыберите, что сделать:"     +
+                          "\n1. Ввести элементы вручную" +
+                          "\n2. Сгенерировать элементы"  +
+                          " с помощью датчика случайных" +
+                          " чисел\n3. Вернуться в"       +
+                          " предыдущее меню\nВаш выбор: ");
 
             string choice = Console.ReadLine()!;
 
             switch (choice)
             {
                 case "1":
-                    Console.WriteLine(MenuArrCreateRead);
+                    Console.WriteLine("\nВыбрано ввести элементы массива вручную");
                     ReadArray(out jaggedArrChars);
                     WriteArray(jaggedArrChars);
                     return;
                 case "2":
-                    Console.WriteLine(MenuArrCreateGenerate);
+                    Console.WriteLine("\nВыбрано сгенерировать элементы массива " +
+                                      "с помощью датчика случайных чисел");
                     GenerateArray(out jaggedArrChars);
                     WriteArray(jaggedArrChars);
                     return;
                 case "3":
-                    Console.WriteLine(ReturnToPreviousMenu);
+                    Console.WriteLine("\nВы выбрали вернуться в предыдущее меню");
                     return;
                 default:
                     Console.WriteLine(ErrUnknownChar);
@@ -189,11 +123,12 @@ internal static class Program
         Console.Write(InputCountOf);
         ReadUint(out uint countOfRows);
         jaggedArrChars = new char[countOfRows][];
-        Console.WriteLine(ReadArrayWarn);
+        Console.WriteLine("\nСимволы вводите подряд, не разделяя ничем\n" +
+                          "Для завершения ввода нажмите “Enter”");
 
         for (int i = 0; i < countOfRows; i++)
         {
-            Console.Write(ReadArrayInput + (i + 1) + ": ");
+            Console.Write($"Введите строку символов №{i + 1}: ");
             jaggedArrChars[i] = Console.ReadLine()!.ToCharArray();
         }
 
@@ -232,15 +167,16 @@ internal static class Program
                 if (CountOfVowels(jaggedArray[indexOfRow]) >= 3)
                 {
                     jaggedArray = jaggedArray.DeleteRow(indexOfRow);
-                    Console.WriteLine(DeleteSuccess + (indexOfRow + 1));
+                    Console.WriteLine($"Строка {indexOfRow + 1} успешно удалена!");
                     return;
                 }
 
-            Console.WriteLine(DeleteFailFind);
+            Console.WriteLine("\nНе найдено строки, в которой есть" +
+                              " не менее 3 гласных букв!\nУдаление невозможно!");
         }
         else
         {
-            Console.WriteLine(DeleteArrEmpty);
+            Console.WriteLine("Массив пустой, удаление невозможно!");
         }
     }
 
@@ -249,7 +185,7 @@ internal static class Program
     /// <param name="index">Индекс удаляемой строки</param>
     private static char[][] DeleteRow(this char[][] jaggedArray, uint index)
     {
-        // Копирование строк с индексами, не равными заданному
+        // Поверхностное копирование строк с индексами, не равными заданному
         char[][] resultArray = new char[jaggedArray.Length - 1][];
         for (uint indexOfRow = 0; indexOfRow < index; indexOfRow++)
             resultArray[indexOfRow] = jaggedArray[indexOfRow];
@@ -277,7 +213,7 @@ internal static class Program
                 Console.WriteLine();
             }
         else
-            Console.WriteLine(ArrayEmpty);
+            Console.WriteLine("Массив не содержит элементов");
     }
 
     /// <summary>
@@ -291,9 +227,234 @@ internal static class Program
         {
             isConvert = uint.TryParse(Console.ReadLine(), out uintNum);
             if (!isConvert)
-                Console.Write(ErrConvert);
+                Console.Write("\nОШИБКА! Введено нецелое число, или" +
+                              " отрицательное, или не число!"        +
+                              "\nВведите заново: ");
         } while (!isConvert);
     }
+
+    #endregion
+
+    #region Символьные строки
+
+    // Меню для работы с рваным массивом
+    private static void MenuString()
+    {
+        string str = "";
+        while (true)
+        {
+            Console.Write("\nВыберите, что сделать:"             +
+                          "\n1. Создать строку символов"         +
+                          "\n2. Перевернуть в строке"            +
+                          " каждое предложение, заканчивающееся" +
+                          " символом ‘!’\n3. Вывести строку"     +
+                          " на экран\n4. Вернуться в главное"    +
+                          " меню\nВаш выбор: ");
+            string choice = Console.ReadLine()!;
+
+            switch (choice)
+            {
+                case "1":
+                    Console.WriteLine("\nВы выбрали создать строку символов");
+                    MenuCreateString(ref str);
+                    break;
+                case "2":
+                    Console.WriteLine("\nВы выбрали перевернуть в строке"    +
+                                      " каждое предложение, заканчивающееся" +
+                                      " символом ‘!’");
+
+                    string[] sentences = FindSentEndWithExclPoint(str);
+                    ReverseSentences(ref str, sentences);
+                    break;
+                case "3":
+                    Console.WriteLine("\nВы выбрали вывести строку на экран" +
+                                      $"\n{(str.Length > 0 ? str : "Строка пуста")}");
+                    break;
+                case "4":
+                    Console.WriteLine(ReturnToMain);
+                    return;
+                default:
+                    Console.WriteLine(ErrUnknownChar);
+                    break;
+            }
+        }
+    }
+
+    /// Меню для выбора метода создания строки
+    private static void MenuCreateString(ref string str)
+    {
+        while (true)
+        {
+            Console.Write("\nВыберите, что сделать:"       +
+                          "\n1. Ввести строку вручную"     +
+                          "\n2. Выбрать строку из"         +
+                          " строк, приготовленных заранее" +
+                          "\n3. Вернуться в меню работы"   +
+                          " со строками\nВаш выбор: ");
+
+            string choice = Console.ReadLine()!;
+
+            switch (choice)
+            {
+                case "1":
+                    Console.WriteLine("\nВыбрано ввести строку символов" +
+                                      " вручную\nВведите строку:");
+                    str = Console.ReadLine()!;
+                    return;
+                case "2":
+                    Console.WriteLine("\nВы выбрали использовать строки," +
+                                      " приготовленные заранее");
+                    MenuChooseString(out str);
+                    Console.WriteLine(str);
+                    return;
+                case "3":
+                    Console.WriteLine(ReturnToStringMenu);
+                    return;
+                default:
+                    Console.WriteLine(ErrUnknownChar);
+                    break;
+            }
+        }
+    }
+
+    /// Меню для выбора из заготовленных строк
+    private static void MenuChooseString(out string str)
+    {
+        string[] strings =
+        {
+            "Здравствуйте!",
+
+            "Здравствуйте! Классы StringBuilder и String.",
+
+            "Классы StringBuilder и String. Они предоставляют" +
+            " достаточную функциональность для работы!",
+
+            "Классы StringBuilder и String. Они предоставляют"      +
+            " достаточную функциональность для работы со строками!" +
+            " Однако .NET предлагает...",
+
+            "Однако .NET предлагает еще один мощный инструмент" +
+            " - регулярные выражения! Регулярные выражения"     +
+            " представляют эффективный. Также гибкий метод по"  +
+            " обработке больших текстов!!!",
+
+            "Однако .NET предлагает еще один мощный инструмент - регулярные выражения? Позволяя в то же время существенно уменьшить объемы кода! По сравнению с использованием стандартных строковых операций."
+        };
+
+        while (true)
+        {
+            Console.Write("Выберите длину строки:"                   +
+                          "\n1. Очень короткая (1 слово)"            +
+                          "\n2. Короткая (5 слов)"                   +
+                          "\n3. Средняя (10 слов)"                   +
+                          "\n4. Длинная (15 слов)"                   +
+                          "\n5. Очень длинная (20 слов)"             +
+                          "\n6. Вернуться в меню работы со строками" +
+                          "\nВаш выбор: ");
+
+            string choice = Console.ReadLine()!;
+
+            switch (choice)
+            {
+                case "1":
+                    Console.WriteLine("Вы выбрали строку с очень маленькой длиной");
+                    str = strings[0];
+                    return;
+                case "2":
+                    Console.WriteLine("Вы выбрали строку с маленькой длиной");
+                    str = strings[1];
+                    return;
+                case "3":
+                    Console.WriteLine("Вы выбрали строку со средней длиной");
+                    str = strings[2];
+                    return;
+                case "4":
+                    Console.WriteLine("Вы выбрали строку с большой длиной");
+                    str = strings[3];
+                    return;
+                case "5":
+                    Console.WriteLine("Вы выбрали строку с очень большой длиной");
+                    str = strings[4];
+                    return;
+                case "6":
+                    Console.WriteLine(ReturnToStringMenu);
+                    str = strings[5];
+                    return;
+                default:
+                    Console.WriteLine(ErrUnknownChar);
+                    break;
+            }
+        }
+    }
+
+    /// Найти предложения, оканчивающиеся на воскл. знак
+    /// <param name="inputStr">Исходная строка</param>
+    /// <returns>Массив строк-предложений</returns>
+    private static string[] FindSentEndWithExclPoint(string inputStr)
+    {
+        // \w — первый символ алфавитно-цифровой знак,
+        // (\w| )+ — след. символы либо алфавитно-цифровые знаки, либо пробелы
+        // !+ — оканчивается на воскл. знаки
+        Regex regex = new(@"\w[\w -]+[^'?''.'](!+)");
+
+        MatchCollection matches   = regex.Matches(inputStr);
+        string[]        sentences = Array.Empty<string>();
+        uint            index     = 0;
+
+        if (inputStr.Length == 0)
+        {
+            Console.WriteLine("В строке нет символов, выполнение невозможно!");
+            return sentences;
+        }
+
+        if (matches.Count > 0)
+            foreach (Match match in matches)
+            {
+                Array.Resize(ref sentences, sentences.Length + 1);
+                sentences[index++] = match.ToString();
+            }
+        else
+            Console.WriteLine("\nСтрока не содержит корректных предложений," +
+                              " оканчивающихся на ‘!’");
+
+        return sentences;
+    }
+
+    private static void ReverseSentences(ref string inputStr, string[] sentences)
+    {
+        if (sentences.Length <= 0) return;
+        foreach (string sentence in sentences)
+        {
+            char[] newSentence = sentence.ToCharArray();
+            Array.Reverse(newSentence);
+            inputStr = inputStr.Replace(sentence, new string(newSentence));
+        }
+
+        Console.WriteLine("Предложения успешно перевернуты!");
+        Console.WriteLine(inputStr);
+    }
+
+    #endregion
+
+    #region Литерные сроки
+
+    private const string ReturnToMain       = "\nВы выбрали вернуться в главное меню";
+    private const string CreateArraySuccess = "\nМассив успешно создан!";
+
+    /// Символы для заполнения массива
+    private const string Chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+                                 "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"                    +
+                                 "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ0123456789";
+
+    /// Гласные буквы
+    private const string Vowels = "eyuioaEYUIOAуеёыаоэяиюУЕЁЫАОЭЯИЮ";
+
+    private const string ErrUnknownChar = "\nВы ввели неизвестный символ! Введите заново!";
+
+    private const string InputCountOf = "\nВведите целое неотрицательное число" +
+                                        " – количество строк рваного массива: ";
+
+    private const string ReturnToStringMenu = "Вы выбрали вернуться в меню работы со строками";
 
     #endregion
 }
