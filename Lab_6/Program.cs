@@ -167,7 +167,8 @@ internal static class Program
                 if (CountOfVowels(jaggedArray[indexOfRow]) >= 3)
                 {
                     jaggedArray = jaggedArray.DeleteRow(indexOfRow);
-                    Console.WriteLine($"Строка {indexOfRow + 1} успешно удалена!");
+                    Console.WriteLine($"Строка №{indexOfRow + 1} успешно удалена!");
+                    WriteArray(jaggedArray);
                     return;
                 }
 
@@ -209,7 +210,7 @@ internal static class Program
             foreach (T[] row in jaggedArrInts)
             {
                 foreach (T element in row)
-                    Console.Write($"{element,5}");
+                    Console.Write($"{element,2}");
                 Console.WriteLine();
             }
         else
@@ -297,9 +298,10 @@ internal static class Program
             switch (choice)
             {
                 case "1":
-                    Console.WriteLine("\nВыбрано ввести строку символов" +
-                                      " вручную\nВведите строку:");
-                    str = Console.ReadLine()!;
+                    Console.WriteLine("\nВыбрано ввести строку символов вручную" +
+                                      "\nЗнаки препинания не повторяются!"       +
+                                      "\nВведите строку:");
+                    ReadCorrectString(out str);
                     return;
                 case "2":
                     Console.WriteLine("\nВы выбрали использовать строки," +
@@ -329,14 +331,14 @@ internal static class Program
             "Классы StringBuilder и String. Они предоставляют" +
             " достаточную функциональность для работы!",
 
-            "Классы StringBuilder и String. Они предоставляют"      +
+            "Они предоставляют"                                     +
             " достаточную функциональность для работы со строками!" +
-            " Однако .NET предлагает...",
+            " Однако .NET предлагает еще один мощный инструмент.",
 
             "Однако .NET предлагает еще один мощный инструмент" +
             " - регулярные выражения! Регулярные выражения"     +
             " представляют эффективный. Также гибкий метод по"  +
-            " обработке больших текстов!!!",
+            " обработке больших текстов!",
 
             "Однако .NET предлагает еще один мощный инструмент" +
             " - регулярные выражения? Позволяя в то же время"   +
@@ -425,16 +427,37 @@ internal static class Program
 
     private static void ReverseSentences(ref string inputStr, string[] sentences)
     {
-        if (sentences.Length <= 0) return;
+        if (sentences.Length == 0) return;
+
         foreach (string sentence in sentences)
         {
+            // Переворот предложения
             char[] newSentence = sentence.ToCharArray();
             Array.Reverse(newSentence);
+
             inputStr = inputStr.Replace(sentence, new string(newSentence));
         }
 
         Console.WriteLine("Предложения успешно перевернуты!");
         Console.WriteLine(inputStr);
+    }
+
+    /// Ввод строки с проверкой на повторяющиеся пунктуационные знаки
+    /// <param name="input">Выходная строка</param>
+    private static void ReadCorrectString(out string input)
+    {
+        bool  isCorrect;
+        Regex regex = new(@"(,,)|(;;)|(::)|(\.\.)|(!!)|(\?\?)");
+        do
+        {
+            input     = Console.ReadLine()!;
+            isCorrect = regex.Matches(input).Count == 0;
+            Console.WriteLine(isCorrect
+                                  ? "\nСтрока успешно введена!"
+                                  : "\nОбнаружены повторяющиеся" +
+                                    " пунктуационные знаки!"   +
+                                    "\nВведите строку заново!");
+        } while (!isCorrect);
     }
 
     #endregion
