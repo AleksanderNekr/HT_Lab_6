@@ -124,6 +124,7 @@ internal static class Program
         ReadUint(out uint countOfRows);
         jaggedArrChars = new char[countOfRows][];
 
+        // Если строк 0, то ввод не нужен
         if (countOfRows == 0) return;
 
         Console.WriteLine("\nСимволы вводите подряд, не разделяя ничем\n" +
