@@ -426,6 +426,9 @@ internal static class Program
         return sentences;
     }
 
+    /// Переворот предложений в строке
+    /// <param name="inputStr">Строка</param>
+    /// <param name="sentences">Предложения</param>
     private static void ReverseSentences(ref string inputStr, string[] sentences)
     {
         if (sentences.Length == 0) return;
