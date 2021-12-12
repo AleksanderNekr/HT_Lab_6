@@ -458,8 +458,7 @@ internal static class Program
             isCorrect = regex.Matches(input).Count == 0;
             Console.WriteLine(isCorrect
                                   ? "\nСтрока успешно введена!"
-                                  : "\nОбнаружены повторяющиеся" +
-                                    " пунктуационные знаки!"   +
+                                  : "\nОбнаружены повторяющиеся знаки!"   +
                                     "\nВведите строку заново!");
         } while (!isCorrect);
     }
