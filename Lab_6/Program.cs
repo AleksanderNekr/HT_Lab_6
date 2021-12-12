@@ -448,7 +448,10 @@ internal static class Program
     private static void ReadCorrectString(out string input)
     {
         bool  isCorrect;
-        Regex regex = new(@"(,,)|(;;)|(::)|(\.\.)|(!!)|(\?\?)");
+
+        // [^\w\s] – не буквенно-циферный символ
+        // \s* – отделен от другого либо ничем, либо пробельным символом
+        Regex regex = new(@"[^\w\s]\s*[^\w\s]");
         do
         {
             input     = Console.ReadLine()!;
