@@ -403,9 +403,9 @@ internal static class Program
     private static string[] FindSentEndWithExclPoint(string inputStr)
     {
         // \w – первый символ буква или цифра
-        // [^\.\?]+ – последующие символы любые, кроме знаков окончания предложения, не считая "!"
+        // [^\.\?!]+ – последующие символы любые, кроме знаков окончания предложения
         // ! – конечный символ, конец нужного прредложения
-        Regex regex = new(@"\w[^\.\?]+!");
+        Regex regex = new(@"\w[^\.\?!]+!");
 
         MatchCollection matches   = regex.Matches(inputStr);
         string[]        sentences = Array.Empty<string>();
