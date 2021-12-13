@@ -242,7 +242,7 @@ internal static class Program
 
     #region Символьные строки
 
-    // Меню для работы с рваным массивом
+    // Меню для работы с символьными строками
     private static void MenuString()
     {
         string str = "";
@@ -404,7 +404,7 @@ internal static class Program
     {
         // \w – первый символ буква или цифра
         // [^\.\?]+ – последующие символы любые, кроме знаков окончания предложения, не считая "!"
-        // ! – конечный смвол, конец нужного прредложения
+        // ! – конечный символ, конец нужного прредложения
         Regex regex = new(@"\w[^\.\?]+!");
 
         MatchCollection matches   = regex.Matches(inputStr);
