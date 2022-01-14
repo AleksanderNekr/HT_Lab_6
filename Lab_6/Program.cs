@@ -326,7 +326,6 @@ internal static class Program
     /// Меню для выбора из заготовленных строк
     private static void MenuChooseString(out string str)
     {
-        // Текст ошибочен пунктуационно, но это не важно
         string[] strings =
         {
             "Здравствуйте!",
