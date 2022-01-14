@@ -14,7 +14,7 @@ internal static class Program
                           "\n3. Завершить выполнение" +
                           " программы\nВаш выбор: ");
 
-            string choice = Console.ReadLine()!;
+            var choice = Console.ReadLine()!;
 
             switch (choice)
             {
@@ -41,7 +41,7 @@ internal static class Program
     /// Меню для работы с рваным массивом
     private static void MenuArr()
     {
-        char[][] jaggedArray = Array.Empty<char[]>();
+        var jaggedArray = Array.Empty<char[]>();
         while (true)
         {
             Console.Write("\nВыберите, что сделать:"                +
@@ -50,7 +50,7 @@ internal static class Program
                           " в которой есть не менее 3 гласных букв" +
                           "\n3. Вывести массив на экран"            +
                           "\n4. Вернуться в главное меню\nВаш выбор: ");
-            string choice = Console.ReadLine()!;
+            var choice = Console.ReadLine()!;
 
             switch (choice)
             {
@@ -90,7 +90,7 @@ internal static class Program
                           " чисел\n3. Вернуться в"       +
                           " предыдущее меню\nВаш выбор: ");
 
-            string choice = Console.ReadLine()!;
+            var choice = Console.ReadLine()!;
 
             switch (choice)
             {
@@ -121,7 +121,7 @@ internal static class Program
     private static void ReadArray(out char[][] jaggedArrChars)
     {
         Console.Write(InputCountOf);
-        ReadUint(out uint countOfRows);
+        ReadUint(out var countOfRows);
         jaggedArrChars = new char[countOfRows][];
 
         // Если строк 0, то ввод не нужен
@@ -130,7 +130,7 @@ internal static class Program
         Console.WriteLine("\nСимволы вводите подряд, не разделяя ничем\n" +
                           "Для завершения ввода нажмите “Enter”");
 
-        for (int i = 0; i < countOfRows; i++)
+        for (var i = 0; i < countOfRows; i++)
         {
             Console.Write($"Введите строку символов №{i + 1}: ");
             jaggedArrChars[i] = Console.ReadLine()!.ToCharArray();
@@ -147,14 +147,14 @@ internal static class Program
     {
         Random generator = new();
         Console.Write(InputCountOf);
-        ReadUint(out uint countOfRows);
+        ReadUint(out var countOfRows);
 
         jaggedArrInts = new char[countOfRows][];
-        for (int i = 0; i < countOfRows; i++)
+        for (var i = 0; i < countOfRows; i++)
         {
-            int countOfCells = generator.Next(1, 11);
+            var countOfCells = generator.Next(1, 11);
             jaggedArrInts[i] = new char[countOfCells];
-            for (int j = 0; j < countOfCells; j++)
+            for (var j = 0; j < countOfCells; j++)
                 jaggedArrInts[i][j] = Chars[generator.Next(Chars.Length)];
         }
 
@@ -191,10 +191,10 @@ internal static class Program
     private static char[][] DeleteRow(this char[][] jaggedArray, uint index)
     {
         // Поверхностное копирование строк с индексами, не равными заданному
-        char[][] resultArray = new char[jaggedArray.Length - 1][];
+        var resultArray = new char[jaggedArray.Length - 1][];
         for (uint indexOfRow = 0; indexOfRow < index; indexOfRow++)
             resultArray[indexOfRow] = jaggedArray[indexOfRow];
-        for (uint indexOfRow = index + 1; indexOfRow < jaggedArray.Length; indexOfRow++)
+        for (var indexOfRow = index + 1; indexOfRow < jaggedArray.Length; indexOfRow++)
             resultArray[indexOfRow - 1] = jaggedArray[indexOfRow];
 
         return resultArray;
@@ -211,9 +211,9 @@ internal static class Program
     private static void WriteArray<T>(T[][] jaggedArrInts)
     {
         if (jaggedArrInts.Length > 0)
-            foreach (T[] row in jaggedArrInts)
+            foreach (var row in jaggedArrInts)
             {
-                foreach (T element in row)
+                foreach (var element in row)
                     Console.Write($"{element,2}");
                 Console.WriteLine();
             }
@@ -245,7 +245,7 @@ internal static class Program
     // Меню для работы с символьными строками
     private static void MenuString()
     {
-        string str = "";
+        var str = "";
         while (true)
         {
             Console.Write("\nВыберите, что сделать:"             +
@@ -255,7 +255,7 @@ internal static class Program
                           " символом ‘!’\n3. Вывести строку"     +
                           " на экран\n4. Вернуться в главное"    +
                           " меню\nВаш выбор: ");
-            string choice = Console.ReadLine()!;
+            var choice = Console.ReadLine()!;
 
             switch (choice)
             {
@@ -268,7 +268,7 @@ internal static class Program
                                       " каждое предложение, заканчивающееся" +
                                       " символом ‘!’");
 
-                    string[] sentences = FindSentEndWithExclPoint(str);
+                    var sentences = FindSentEndWithExclPoint(str);
                     ReverseSentences(ref str, sentences);
                     break;
                 case "3":
@@ -297,7 +297,7 @@ internal static class Program
                           "\n3. Вернуться в меню работы"   +
                           " со строками\nВаш выбор: ");
 
-            string choice = Console.ReadLine()!;
+            var choice = Console.ReadLine()!;
 
             switch (choice)
             {
@@ -341,8 +341,8 @@ internal static class Program
             " Однако .NET предлагает еще один мощный инструмент.",
 
             "Однако .NET предлагает; еще один: мощный инструмент" +
-            " - регулярные выражения! Регулярные выражения"        +
-            " представляют, эффективный. Также гибкий метод: по"   +
+            " - регулярные выражения! Регулярные выражения"       +
+            " представляют, эффективный. Также гибкий метод: по"  +
             " обработке больших, текстов!",
 
             "Однако .NET предлагает; еще один: мощный инструмент" +
@@ -362,7 +362,7 @@ internal static class Program
                           "\n6. Вернуться в меню работы со строками" +
                           "\nВаш выбор: ");
 
-            string choice = Console.ReadLine()!;
+            var choice = Console.ReadLine()!;
 
             switch (choice)
             {
@@ -407,9 +407,9 @@ internal static class Program
         // ! – конечный символ, конец нужного прредложения
         Regex regex = new(@"\w[^\.\?!]*!");
 
-        MatchCollection matches   = regex.Matches(inputStr);
-        string[]        sentences = Array.Empty<string>();
-        uint            index     = 0;
+        var  matches   = regex.Matches(inputStr);
+        var  sentences = Array.Empty<string>();
+        uint index     = 0;
 
         if (inputStr.Length == 0)
         {
@@ -427,6 +427,7 @@ internal static class Program
             Console.WriteLine("\nСтрока не содержит корректных предложений," +
                               " оканчивающихся на ‘!’");
 
+
         return sentences;
     }
 
@@ -437,10 +438,10 @@ internal static class Program
     {
         if (sentences.Length == 0) return;
 
-        foreach (string sentence in sentences)
+        foreach (var sentence in sentences)
         {
             // Переворот предложения
-            char[] newSentence = sentence.ToCharArray();
+            var newSentence = sentence.ToCharArray();
             Array.Reverse(newSentence);
 
             inputStr = inputStr.Replace(sentence, new string(newSentence));
