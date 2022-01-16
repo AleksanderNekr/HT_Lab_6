@@ -459,8 +459,9 @@ internal static class Program
         Regex regex = new(@"[^\w\s]\s*[^\w\s]");
         do
         {
-            input     = Console.ReadLine()!;
-            isCorrect = regex.Matches(input).Count == 0;
+            input = Console.ReadLine()!;
+            isCorrect = regex.Matches(input)
+                             .Count == 0;
             Console.WriteLine(isCorrect
                                   ? "\nСтрока успешно введена!"
                                   : "\nОбнаружены повторяющиеся знаки!" +
