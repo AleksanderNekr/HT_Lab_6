@@ -181,9 +181,7 @@ internal static class Program
                               " не менее 3 гласных букв!\nУдаление невозможно!");
         }
         else
-        {
             Console.WriteLine("Массив пустой, удаление невозможно!");
-        }
     }
 
     /// Удаление из рваного массива символов строки с заданным индексом
@@ -209,12 +207,14 @@ internal static class Program
     private static void WriteArray<T>(T[][] jaggedArrInts)
     {
         if (jaggedArrInts.Length > 0)
+        {
             foreach (var row in jaggedArrInts)
             {
                 foreach (var element in row)
                     Console.Write($"{element,2}");
                 Console.WriteLine();
             }
+        }
         else
             Console.WriteLine("Массив не содержит элементов");
     }
@@ -230,9 +230,11 @@ internal static class Program
         {
             isConvert = uint.TryParse(Console.ReadLine(), out uintNum);
             if (!isConvert)
+            {
                 Console.Write("\nОШИБКА! Введено нецелое число, или" +
                               " отрицательное, или не число!"        +
                               "\nВведите заново: ");
+            }
         } while (!isConvert);
     }
 
@@ -415,15 +417,18 @@ internal static class Program
         }
 
         if (matches.Count > 0)
+        {
             foreach (Match match in matches)
             {
                 Array.Resize(ref sentences, sentences.Length + 1);
                 sentences[index++] = match.ToString();
             }
+        }
         else
-            Console.WriteLine("\nСтрока не содержит корректных предложений," +
-                              " оканчивающихся на ‘!’");
-
+        {
+            Console.WriteLine("\nСтрока не содержит корректных предложений,"
+                            + " оканчивающихся на ‘!’");
+        }
 
         return sentences;
     }
@@ -433,7 +438,8 @@ internal static class Program
     /// <param name="sentences">Предложения</param>
     private static void ReverseSentences(ref string inputStr, string[] sentences)
     {
-        if (sentences.Length == 0) return;
+        if (sentences.Length == 0)
+            return;
 
         foreach (var sentence in sentences)
         {
@@ -459,8 +465,9 @@ internal static class Program
         Regex regex = new(@"[^\w\s]\s*[^\w\s]");
         do
         {
-            input     = Console.ReadLine()!;
-            isCorrect = regex.Matches(input).Count == 0;
+            input = Console.ReadLine()!;
+            isCorrect = regex.Matches(input)
+                             .Count == 0;
             Console.WriteLine(isCorrect
                                   ? "\nСтрока успешно введена!"
                                   : "\nОбнаружены повторяющиеся знаки!" +
