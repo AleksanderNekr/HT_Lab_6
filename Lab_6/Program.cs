@@ -125,7 +125,8 @@ internal static class Program
         jaggedArrChars = new char[countOfRows][];
 
         // Если строк 0, то ввод не нужен
-        if (countOfRows == 0) return;
+        if (countOfRows == 0)
+            return;
 
         Console.WriteLine("\nСимволы вводите подряд, не разделяя ничем\n" +
                           "Для завершения ввода нажмите “Enter”");
