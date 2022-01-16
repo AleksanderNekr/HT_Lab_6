@@ -168,13 +168,14 @@ internal static class Program
         if (jaggedArray.Length > 0)
         {
             for (uint indexOfRow = 0; indexOfRow < jaggedArray.Length; indexOfRow++)
-                if (CountOfVowels(jaggedArray[indexOfRow]) >= 3)
-                {
-                    jaggedArray = jaggedArray.DeleteRow(indexOfRow);
-                    Console.WriteLine($"Строка №{indexOfRow + 1} успешно удалена!");
-                    WriteArray(jaggedArray);
-                    return;
-                }
+            {
+                if (CountOfVowels(jaggedArray[indexOfRow]) < 3)
+                    continue;
+                jaggedArray = jaggedArray.DeleteRow(indexOfRow);
+                Console.WriteLine($"Строка №{indexOfRow + 1} успешно удалена!");
+                WriteArray(jaggedArray);
+                return;
+            }
 
             Console.WriteLine("\nНе найдено строки, в которой есть" +
                               " не менее 3 гласных букв!\nУдаление невозможно!");
@@ -202,10 +203,7 @@ internal static class Program
 
     /// Подсчет количества гласных букв в массиве символов
     /// <param name="chars">Массив символов</param>
-    private static int CountOfVowels(char[] chars)
-    {
-        return chars.Count(symbol => Vowels.Contains(symbol));
-    }
+    private static int CountOfVowels(char[] chars) => chars.Count(symbol => Vowels.Contains(symbol));
 
     ///Вывод рваного массива в консоль
     private static void WriteArray<T>(T[][] jaggedArrInts)
