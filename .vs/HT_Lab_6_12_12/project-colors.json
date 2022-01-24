@@ -1,5 +1,11 @@
 {
   "Version": 1,
-  "ProjectMap": {},
-  "NextColorIndex": 0
+  "ProjectMap": {
+    "bfff8293-b994-451b-bd77-94c9eada377a": {
+      "ProjectGuid": "bfff8293-b994-451b-bd77-94c9eada377a",
+      "DisplayName": "Lab_6",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
 }
